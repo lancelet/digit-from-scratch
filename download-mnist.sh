@@ -20,4 +20,4 @@ curl http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz | \
 # test set labels
 curl http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz | \
     gunzip --stdout > \
-    ./mnist-data/t10k-images-idx1-ubyte
+    ./mnist-data/t10k-labels-idx1-ubyte
