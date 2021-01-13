@@ -1,9 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Main where
 
-import Data.Massiv.Array (Array, B, Ix1)
+import Conv (rot180)
+import Data.Massiv.Array (Array, B, Ix1, Ix2 ((:.)))
 import qualified Data.Massiv.Array as Array
+import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import Data.Word (Word8)
 import MNIST (Image, Label)
@@ -20,6 +23,14 @@ main = do
   T.putStrLn "Test dump of an image"
   MNIST.saveMNISTPNG "test.png" (trainingImages Array.! 0)
   T.putStrLn "Done"
+
+  -- Quick check of  180 degree rotation of a matrix
+
+  let testMat :: Array B Ix2 Int = Array.makeArray Array.Seq (Array.Sz2 3 3) (\(j :. i) -> i + j * 3)
+  T.putStrLn . T.pack . show $ testMat
+
+  let rotMat = rot180 testMat
+  T.putStrLn . T.pack . show $ rotMat
 
 loadTrainingLabels :: IO (Array B Ix1 Label)
 loadTrainingLabels = do
