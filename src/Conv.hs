@@ -17,7 +17,8 @@ import Data.Massiv.Array
 import qualified Data.Massiv.Array as Array
 import Data.Massiv.Array.Stencil (Stencil)
 import qualified Data.Massiv.Array.Stencil as Stencil
-import Grad (Grad, LearningRate)
+import Data.Massiv.Core (Border (Fill))
+import Grad (Grad)
 import qualified Grad
 import MNIST (Image)
 import qualified MNIST
@@ -53,12 +54,52 @@ Deep dive into backprop for convolution layers:
 
 -- | Backpropagation adjustment of the convolution layer weights.
 backprop ::
-  LearningRate ->
   Image Float ->
   Grad (Image Float) ->
   Conv ->
   (Grad Conv, Grad (Image Float))
-backprop rate input dy conv = undefined
+backprop input dy conv = (Grad.Grad $ Conv dArray dBias, Grad.Grad dImage)
+  where
+    -- Gradient of the bias is the sum of the gradient of the actibation map,
+    --   dy.
+    dBias :: Float
+    dBias = Array.sum . MNIST.unImage . Grad.unGrad $ dy
+
+    -- Gradient of the image is the convolution of the zero padded activation
+    --   map gradient (zero-padded dy) with the 180-degree rotated weights
+    --   matrix.
+    dImage :: Image Float
+    dImage =
+      MNIST.Image $
+        Array.compute $
+          Stencil.mapStencil
+            (Fill 0.0)
+            stencil
+            (MNIST.unImage . Grad.unGrad $ dy)
+      where
+        stencil :: Stencil Ix2 Float Float
+        stencil =
+          Stencil.makeConvolutionStencilFromKernel
+            . rot180
+            . convArray
+            $ conv
+
+    -- Gradient of the weights array is the convolution of the input image
+    --   with the gradient of the activation map, dy.
+    dArray :: Array U Ix2 Float
+    dArray =
+      Array.compute $
+        Stencil.applyStencil
+          Stencil.noPadding
+          stencil
+          (MNIST.unImage input)
+      where
+        stencil :: Stencil Ix2 Float Float
+        stencil =
+          Stencil.makeConvolutionStencilFromKernel
+            . MNIST.unImage
+            . Grad.unGrad
+            $ dy
 
 -- | Rotate a matrix by 180 degrees.
 rot180 ::
