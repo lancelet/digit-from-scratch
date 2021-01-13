@@ -4,6 +4,7 @@ module Main where
 
 import qualified Data.Text.IO as T
 import qualified Data.Vector as V
+import Data.Word (Word8)
 import MNIST (Image, Label)
 import qualified MNIST
 import System.Exit (exitFailure)
@@ -45,7 +46,7 @@ loadTestingLabels = do
       T.putStrLn $ "  loaded " <> showt (V.length labels) <> " labels"
       pure labels
 
-loadTrainingImages :: IO (V.Vector Image)
+loadTrainingImages :: IO (V.Vector (Image Word8))
 loadTrainingImages = do
   T.putStrLn "Loading MNIST training images"
   mImages <- MNIST.loadMNISTImages "mnist-data/train-images-idx3-ubyte"
@@ -58,7 +59,7 @@ loadTrainingImages = do
       T.putStrLn $ "  loaded " <> showt (V.length images) <> " images"
       pure images
 
-loadTestingImages :: IO (V.Vector Image)
+loadTestingImages :: IO (V.Vector (Image Word8))
 loadTestingImages = do
   T.putStrLn "Loading MNIST testing images"
   mImages <- MNIST.loadMNISTImages "mnist-data/t10k-images-idx3-ubyte"
