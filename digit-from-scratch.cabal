@@ -41,7 +41,10 @@ executable dfs
 library
   import:          base, ghc-options
   hs-source-dirs:  src
-  exposed-modules: MNIST
+  exposed-modules:
+    Conv
+    MNIST
+
   build-depends:
     , bytestring   ^>=0.10.10.0
     , cereal       ^>=0.5.8.1
