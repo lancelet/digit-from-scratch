@@ -18,6 +18,7 @@ Work-in-progress:
   - [x] Loading MNIST images and label sets from raw binary
   - [x] Convolution layer forward evaluation
   - [x] Convolution layer back-propagation
+  - [ ] Numerical test of gradient for convolution layer
   - [ ] Sigmoidal activation function
   - [ ] Sub-sampling layer forward evaluation
   - [ ] Sub-sampling layer back-propagation
