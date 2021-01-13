@@ -7,7 +7,17 @@ import qualified Codec.Picture as Picture
 import Data.Bifunctor (first)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
-import Data.Massiv.Array (Array, B, Comp (Seq), Ix1, Ix2 ((:.)), Sz (Sz1, Sz2), U (U), Unbox, (!))
+import Data.Massiv.Array
+  ( Array,
+    B,
+    Comp (Seq),
+    Ix1,
+    Ix2 ((:.)),
+    Sz (Sz1, Sz2),
+    U (U),
+    Unbox,
+    (!),
+  )
 import qualified Data.Massiv.Array as Array
 import qualified Data.Serialize.Get as Cereal
 import Data.Text (Text)
