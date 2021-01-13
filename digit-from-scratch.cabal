@@ -34,9 +34,9 @@ executable dfs
   hs-source-dirs: app
   build-depends:
     , digit-from-scratch
+    , massiv              ^>=0.5.9.0
     , text                ^>=1.2.3.2
     , text-show           ^>=3.9
-    , vector              ^>=0.12.1.2
 
 library
   import:          base, ghc-options
@@ -46,5 +46,5 @@ library
     , bytestring   ^>=0.10.10.0
     , cereal       ^>=0.5.8.1
     , JuicyPixels  ^>=3.3.5
+    , massiv       ^>=0.5.9.0
     , text         ^>=1.2.3.2
-    , vector       ^>=0.12.1.2
