@@ -1,0 +1,40 @@
+cabal-version:      2.4
+name:               digit-from-scratch
+version:            0.1.0.0
+synopsis:           CNN for identifying MNIST digits; from scratch
+description:
+  This is just a learning activity. I'm building a CNN to identify
+  MNIST digits. I'm avoiding using any existing neural-network
+  libraries so that I re-learn implementing everything myself.
+
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Jonathan Merritt
+maintainer:         j.s.merritt@gmail.com
+copyright:          Copyright (C) Jonathan Merritt 2021
+category:           Learning
+extra-source-files: CHANGELOG.md
+
+source-repository head
+  type:     git
+  location: https://github.com/lancelet/digit-from-scratch.git
+
+common base
+  default-language: Haskell2010
+  build-depends:    base ^>=4.13.0.0
+
+common ghc-options
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wredundant-constraints
+
+executable dfs
+  import:         base, ghc-options
+  main-is:        Main.hs
+  build-depends:  digit-from-scratch
+  hs-source-dirs: app
+
+library
+  import:          base, ghc-options
+  hs-source-dirs:  src
+  exposed-modules: MyLib
