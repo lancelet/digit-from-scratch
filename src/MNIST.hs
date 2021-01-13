@@ -14,20 +14,18 @@ import qualified Data.Vector as V
 import qualified Data.Vector.Storable as VS
 import Data.Word (Word32, Word8)
 
-newtype Image = Image {unImage :: VS.Vector Word8}
+data Image = Image
+  { imageWidth :: {-# UNPACK #-} !Word32,
+    imageHeight :: {-# UNPACK #-} !Word32,
+    imagePixels :: {-# UNPACK #-} !(VS.Vector Word8)
+  }
 
 newtype Label = Label {unLabel :: Word8}
-
-imageWidth :: Image -> Word32
-imageWidth _ = 28
-
-imageHeight :: Image -> Word32
-imageHeight _ = 28
 
 getPixel :: Image -> Word32 -> Word32 -> Word8
 getPixel image x _ | x >= imageWidth image = 0
 getPixel image _ y | y >= imageHeight image = 0
-getPixel image x y = unImage image VS.! lindex
+getPixel image x y = imagePixels image VS.! lindex
   where
     lindex :: Int
     lindex =
@@ -63,7 +61,8 @@ getMNISTImageFile = do
     _ -> fail "Invalid magic number"
 
 getMNISTImage :: Word32 -> Word32 -> Cereal.Get Image
-getMNISTImage width height = Image <$> VS.replicateM nPixels Cereal.getWord8
+getMNISTImage width height =
+  Image width height <$> VS.replicateM nPixels Cereal.getWord8
   where
     nPixels :: Int
     nPixels = fromIntegral width * fromIntegral height

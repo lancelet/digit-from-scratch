@@ -7,6 +7,7 @@ import qualified Data.Vector as V
 import MNIST (Image, Label)
 import qualified MNIST
 import System.Exit (exitFailure)
+import TextShow (showt)
 
 main :: IO ()
 main = do
@@ -27,7 +28,9 @@ loadTrainingLabels = do
       T.putStrLn "Could not load MNIST training labels:"
       T.putStrLn errMsg
       exitFailure
-    Right labels -> pure labels
+    Right labels -> do
+      T.putStrLn $ "  loaded " <> showt (V.length labels) <> " labels"
+      pure labels
 
 loadTestingLabels :: IO (V.Vector Label)
 loadTestingLabels = do
@@ -38,7 +41,9 @@ loadTestingLabels = do
       T.putStrLn "Could not load MNIST testing labels:"
       T.putStrLn errMsg
       exitFailure
-    Right labels -> pure labels
+    Right labels -> do
+      T.putStrLn $ "  loaded " <> showt (V.length labels) <> " labels"
+      pure labels
 
 loadTrainingImages :: IO (V.Vector Image)
 loadTrainingImages = do
@@ -49,7 +54,9 @@ loadTrainingImages = do
       T.putStrLn "Could not load MNIST training images:"
       T.putStrLn errMsg
       exitFailure
-    Right images -> pure images
+    Right images -> do
+      T.putStrLn $ "  loaded " <> showt (V.length images) <> " images"
+      pure images
 
 loadTestingImages :: IO (V.Vector Image)
 loadTestingImages = do
@@ -60,4 +67,6 @@ loadTestingImages = do
       T.putStrLn "Could not load MNIST testing images:"
       T.putStrLn errMsg
       exitFailure
-    Right images -> pure images
+    Right images -> do
+      T.putStrLn $ "  loaded " <> showt (V.length images) <> " images"
+      pure images

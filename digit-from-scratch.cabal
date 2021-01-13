@@ -35,6 +35,7 @@ executable dfs
   build-depends:
     , digit-from-scratch
     , text                ^>=1.2.3.2
+    , text-show           ^>=3.9
     , vector              ^>=0.12.1.2
 
 library
