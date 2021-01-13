@@ -12,3 +12,16 @@ Build:
 cabal run
 ```
 
+## Progress so far
+
+Work-in-progress:
+  - [x] Loading MNIST images and label sets from raw binary
+  - [x] Convolution layer forward evaluation
+  - [x] Convolution layer back-propagation
+  - [ ] Sigmoidal activation function
+  - [ ] Sub-sampling layer forward evaluation
+  - [ ] Sub-sampling layer back-propagation
+  - [ ] Fully-connected layer forward evaluation
+  - [ ] Fully-connected layer back-propagation
+  - [ ] RBF units
+
