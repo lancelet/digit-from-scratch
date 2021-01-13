@@ -43,6 +43,7 @@ library
   hs-source-dirs:  src
   exposed-modules:
     Conv
+    Grad
     MNIST
 
   build-depends:
