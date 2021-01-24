@@ -1,6 +1,6 @@
 # Learning Project: LeNet 5 Digit Classification
 
-[![haskell.yml](https://github.com/lancelet/digit-from-scratch/workflows/.github/workflows/haskell.yml/badge.svg)](https://github.com/lancelet/digit-from-scratch/actions?query=workflow%3A%22Haskell+CI%22)
+[![haskell.yml](https://github.com/lancelet/digit-from-scratch/workflows/Haskell%20CI/badge.svg)](https://github.com/lancelet/digit-from-scratch/actions?query=workflow%3A%22Haskell+CI%22)
 
 Working through a re-creation of LeNet 5 from scratch, without using existing
 deep learning packages.
