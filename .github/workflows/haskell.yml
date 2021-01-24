@@ -37,7 +37,7 @@ jobs:
         cabal install cabal-fmt
 
     - name: Run formatting linter (Ormolu and cabal-fmt)
-      run: ./format.hs check
+      run: PATH="$HOME/.cabal/bin:$PATH" ./format.hs check
 
     - name: Build
       run: cabal build --enable-tests --enable-benchmarks all
