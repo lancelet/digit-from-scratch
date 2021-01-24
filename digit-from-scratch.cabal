@@ -28,16 +28,6 @@ common ghc-options
     -Wall -Wcompat -Wincomplete-record-updates
     -Wincomplete-uni-patterns -Wredundant-constraints
 
-executable dfs
-  import:         base, ghc-options
-  main-is:        Main.hs
-  hs-source-dirs: app
-  build-depends:
-    , digit-from-scratch
-    , massiv              ^>=0.5.9.0
-    , text                ^>=1.2.3.2
-    , text-show           ^>=3.9
-
 library
   import:          base, ghc-options
   hs-source-dirs:  src
@@ -52,3 +42,20 @@ library
     , JuicyPixels  ^>=3.3.5
     , massiv       ^>=0.5.9.0
     , text         ^>=1.2.3.2
+
+test-suite dfs-test
+  import:        base, ghc-options
+  type:          exitcode-stdio-1.0
+  hs-source-dir: test
+  main-is:       Test.hs
+  build-depends: hedgehog ^>=1.0.4
+
+executable dfs
+  import:         base, ghc-options
+  main-is:        Main.hs
+  hs-source-dirs: app
+  build-depends:
+    , digit-from-scratch
+    , massiv              ^>=0.5.9.0
+    , text                ^>=1.2.3.2
+    , text-show           ^>=3.9
