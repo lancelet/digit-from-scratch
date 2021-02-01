@@ -5,7 +5,7 @@
 
 {- cabal:
 ghc-options:
-  -O2 -threaded -rtsopts "-with-rtsopts=-N -T"
+  -threaded -rtsopts "-with-rtsopts=-N -T"
   -Wall -Wcompat -Wincomplete-record-updates
   -Wincomplete-uni-patterns -Wredundant-constraints
 build-depends:

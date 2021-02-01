@@ -34,7 +34,7 @@ executable dfs
   hs-source-dirs: app
   build-depends:
     , digit-from-scratch
-    , massiv              ^>=0.5.9.0
+    , massiv              ^>=0.6.0.0
     , text                ^>=1.2.3.2
     , text-show           ^>=3.9
 
@@ -45,10 +45,13 @@ library
     Conv
     Grad
     MNIST
+    SingleLayerHinton
 
   build-depends:
     , bytestring   ^>=0.10.10.0
     , cereal       ^>=0.5.8.1
+    , extra        ^>=1.7.9
     , JuicyPixels  ^>=3.3.5
-    , massiv       ^>=0.5.9.0
+    , massiv       ^>=0.6.0.0
+    , splitmix     ^>=0.1.0.3
     , text         ^>=1.2.3.2
