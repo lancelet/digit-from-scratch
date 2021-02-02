@@ -1,3 +1,4 @@
+{-# LANGUAGE DerivingVia #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
 -- | Decoding MNIST images.
@@ -23,10 +24,22 @@ import qualified Data.Serialize.Get as Cereal
 import Data.Text (Text)
 import qualified Data.Text as T
 import Data.Word (Word32, Word8)
+import Prelude hiding (map)
+
+data LabelledImage a = LabelledImage
+  { liImage :: Image a,
+    liLabel :: Label
+  }
 
 newtype Image a = Image {unImage :: Array U Ix2 a}
 
 newtype Label = Label {unLabel :: Word8}
+
+map :: (Unbox a, Unbox b) => (a -> b) -> Image a -> Image b
+map f = Image . Array.compute . Array.map f . unImage
+
+w8ToFloatImage :: Image Word8 -> Image Float
+w8ToFloatImage = map (\w -> fromIntegral w / 255.0)
 
 getPixel :: (Unbox a) => Image a -> Word32 -> Word32 -> a
 getPixel image x y = unImage image ! ix

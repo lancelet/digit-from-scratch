@@ -189,6 +189,7 @@ replaceSlice replaceIndex newSlice array =
     getSlice :: Ix1 -> Array r' (Lower ix) e -> Array r' (Lower ix) e
     getSlice ix e = if ix == replaceIndex then newSlice else e
 
+-- | Errors at runtime. I can make Haskell suck as bad as Python.
 fromRight :: Either SomeException a -> a
 fromRight (Right x) = x
 fromRight (Left s) = error . show $ s
